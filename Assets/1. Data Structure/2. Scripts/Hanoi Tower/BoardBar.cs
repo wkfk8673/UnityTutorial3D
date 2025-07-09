@@ -25,9 +25,14 @@ public class BoardBar : MonoBehaviour
             {
                 return true;
             }
-            else
+            else if (pushNumber > peekNumber)
             {
                 Debug.Log($"현재 넣으려는 도넛 : {pushNumber}, 꼭대기 도넛 : {peekNumber} 으로 넣을 수 없습니다;");
+                return false;
+            }
+            else if(pushNumber == peekNumber)
+            {
+                Debug.Log("제자리점프");
                 return false;
             }
         }
