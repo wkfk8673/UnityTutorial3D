@@ -10,8 +10,10 @@ public class HanoiTower : MonoBehaviour
     public GameObject[] donutPrefabs; // 도넛 오브젝트를 미리 받아둘 배열
     public BoardBar[] bars; // L, C, R 순
 
-    public static bool isSelected = false; // 전체 게임 기준으로 판단해야함
     public static GameObject selectedDonut;
+    public static bool isSelected = false; // 전체 게임 기준으로 판단해야함
+    public static bool isMoving = false; // 전체 게임 기준으로 판단해야함
+
     public static BoardBar currBar;
     public static int moveCount;
 
@@ -19,7 +21,8 @@ public class HanoiTower : MonoBehaviour
 
     IEnumerator Start()
     {
-
+        countTextUI.gameObject.SetActive(false);
+        isMoving = true;
         for (int i = (int)hanoiLevel -1; i >= 0; i--) // 반복 문으로 level 만큼 도넛 생성
         {
             GameObject donut = Instantiate(donutPrefabs[i]); // 도넛 생성
@@ -31,7 +34,9 @@ public class HanoiTower : MonoBehaviour
         }
 
         moveCount = 0;
-        countTextUI.text = moveCount.ToString();
+        isMoving = false;
+        countTextUI.text = "Hanoi Tower Game";
+        countTextUI.gameObject.SetActive(true);
     }
 
 
@@ -39,12 +44,12 @@ public class HanoiTower : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            currBar.barStack.Push(selectedDonut);
+            currBar.barStack.Push(selectedDonut); // 이미 pop 한 정보의 경우 다시 barStack에 push 하여 저장, 
 
             isSelected = false;
             selectedDonut = null;
+            countTextUI.text = $"cancle";
         }
 
-        countTextUI.text = moveCount.ToString();
     }
 }
