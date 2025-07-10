@@ -11,56 +11,57 @@ public class BoardBar : MonoBehaviour
 
     public bool CheckDonut(GameObject donut)
     {
-        // 바에 도넛이 없을 때는 무관함
-        if(barStack.Count > 0)
+        if (barStack.Count > 0)
         {
-            // 현재 넣으려는 도넛 값을 확인
             int pushNumber = donut.GetComponent<Donut>().donutNumber;
 
-            // 가장 꼭대기 도넛 값을 확인
             GameObject peekDonut = barStack.Peek();
             int peekNumber = peekDonut.GetComponent<Donut>().donutNumber;
 
-            if(pushNumber < peekNumber)
-            {
+            if (pushNumber < peekNumber)
                 return true;
-            }
-            else if (pushNumber > peekNumber)
+            else
             {
-                Debug.Log($"현재 넣으려는 도넛 : {pushNumber}, 꼭대기 도넛 : {peekNumber} 으로 넣을 수 없습니다;");
-                return false;
-            }
-            else if(pushNumber == peekNumber)
-            {
-                Debug.Log("제자리점프");
+                Debug.Log($"현재 넣으려는 도넛은 {pushNumber}이고, 해당 기둥의 제일 위의 도넛은 {peekNumber}입니다.");
                 return false;
             }
         }
+
         return true;
     }
 
     public void PushDonut(GameObject donut)
     {
         if (!CheckDonut(donut))
-        {
             return;
-        }
-        HanoiTower.isSelected = false; // 성공여부를 여기서 판단
-        HanoiTower.selectedDonut = null; // 초기화
 
-        donut.transform.position = transform.position + Vector3.up * 5; // 선택된 바의 상단에서 생성
-        donut.GetComponent<Rigidbody>().linearVelocity = Vector3.zero; // 속도 초기화
-        donut.GetComponent<Rigidbody>().angularVelocity = Vector3.zero; // 속도 초기화
+        HanoiTower.moveCount++;
 
-        barStack.Push(donut); // Stack 에 donut 을 저장하는 기능
+        HanoiTower.isSelected = false;
+        HanoiTower.selectedDonut = null;
+
+        donut.transform.position = transform.position + Vector3.up * 5f;
+        donut.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        donut.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        
+        barStack.Push(donut); // Stack에 GameObject를 넣는 기능
 
     }
 
     public GameObject PopDonut()
     {
-        GameObject donut = barStack.Pop(); // Stack 에서 GameObject 를 꺼내는 기능
-        return donut; // 해당 도넛을 반환
+        if (barStack.Count > 0)
+        {
+            HanoiTower.currBar = this;
+            HanoiTower.isSelected = true;
+            GameObject donut = barStack.Pop(); // Stack에서 GameObject를 꺼내는 기능
+
+            return donut; // 꺼낸 도넛을 반환
+        }
+
+        return null;
     }
+
 
     public void OnMouseDown()
     {

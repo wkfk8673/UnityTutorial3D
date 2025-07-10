@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class HanoiTower : MonoBehaviour
@@ -11,9 +12,14 @@ public class HanoiTower : MonoBehaviour
 
     public static bool isSelected = false; // 전체 게임 기준으로 판단해야함
     public static GameObject selectedDonut;
+    public static BoardBar currBar;
+    public static int moveCount;
+
+    public TextMeshProUGUI countTextUI;
 
     IEnumerator Start()
     {
+
         for (int i = (int)hanoiLevel -1; i >= 0; i--) // 반복 문으로 level 만큼 도넛 생성
         {
             GameObject donut = Instantiate(donutPrefabs[i]); // 도넛 생성
@@ -23,5 +29,22 @@ public class HanoiTower : MonoBehaviour
 
             yield return new WaitForSeconds(1f); // 약간 지연 후 낙하
         }
+
+        moveCount = 0;
+        countTextUI.text = moveCount.ToString();
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            currBar.barStack.Push(selectedDonut);
+
+            isSelected = false;
+            selectedDonut = null;
+        }
+
+        countTextUI.text = moveCount.ToString();
     }
 }
