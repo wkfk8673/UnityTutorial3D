@@ -1,11 +1,12 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HanoiTower : MonoBehaviour
 {
     public enum HanoiLevel { Lv1 = 3, Lv2, Lv3 }
-    public HanoiLevel hanoiLevel;
+    public HanoiLevel hanoiLevel = HanoiLevel.Lv1; //레벨 1로 초기화
 
     public GameObject[] donutPrefabs; // 도넛 오브젝트를 미리 받아둘 배열
     public BoardBar[] bars; // L, C, R 순
@@ -18,7 +19,12 @@ public class HanoiTower : MonoBehaviour
     public static int moveCount;
 
     public TextMeshProUGUI countTextUI;
+    public Button HanoiAnswerBtn;
 
+    void Awake()
+    {
+        HanoiAnswerBtn.onClick.AddListener(HanoiAnswer); // 매개변수 있을 경우 람다식 필요
+    }
     IEnumerator Start()
     {
         countTextUI.gameObject.SetActive(false);
@@ -51,5 +57,26 @@ public class HanoiTower : MonoBehaviour
             countTextUI.text = $"cancle";
         }
 
+    }
+
+    public void HanoiAnswer()
+    {
+        HanoiRoutine((int)hanoiLevel, 0, 1, 2);
+    }
+    
+    private void HanoiRoutine(int n, int from, int temp, int to)
+    {
+        if (n == 0) // 도넛을 다 옮김
+            return;
+
+        if (n == 1)
+            Debug.Log($"{n}번 도넛을 {from} 에서 {to}로 이동");
+        else
+        {
+            HanoiRoutine(n-1, from, to, temp);
+            Debug.Log($"{n}번 도넛을 {from} 에서 {to}로 이동");
+
+            HanoiRoutine(n-1, temp, from, to);
+        }
     }
 }
