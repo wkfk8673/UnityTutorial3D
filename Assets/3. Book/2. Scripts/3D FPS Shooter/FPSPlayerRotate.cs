@@ -14,10 +14,10 @@ public class FPSPlayerRotate : MonoBehaviour
 
         float mouse_x = Input.GetAxis("Mouse X");
 
-        // ¿¬»ê
+        // ï¿½ï¿½ï¿½ï¿½
         mx += mouse_x * rotSpeed * Time.deltaTime;
 
-        // Àû¿ë
+        // ï¿½ï¿½ï¿½ï¿½
         transform.eulerAngles = new Vector3(-my, mx, 0);
     }
 }

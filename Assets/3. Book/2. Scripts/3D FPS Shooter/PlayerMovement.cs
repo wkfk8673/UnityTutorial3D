@@ -37,21 +37,21 @@ public class PlayerMovement : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector3 dir = new Vector3(h, 0, v); // Å©±â¿Í ¹æÇâÀÌ ÀÖ´Â º¤ÅÍ
-        anim.SetFloat("MoveMotion", dir.magnitude); // º¤ÅÍ Å©±â°ª (distance)
-        dir = dir.normalized; // ¹æÇâ º¤ÅÍ
+        Vector3 dir = new Vector3(h, 0, v); // Å©ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
+        anim.SetFloat("MoveMotion", dir.magnitude); // ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â°ª (distance)
+        dir = dir.normalized; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
 
-        // Ä«¸Þ¶óÀÇ Æ®·£½ºÆûÀ» ±âÁØÁ¡À¸·Î º¯È¯. (wasd ÀÌµ¿ÀÇ Áß½É)
+        // Ä«ï¿½Þ¶ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯. (wasd ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ß½ï¿½)
         dir = Camera.main.transform.TransformDirection(dir);
 
 
-        //Áß·Â Àû¿ë
+        //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½ï¿½
         yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
 
-        // Ä³¸¯ÅÍ ÄÁÆ®·Ñ·¯¿¡ ³»ÀåµÈ ÀÌµ¿ ±â´É
+        // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½
         cc.Move(dir * moveSpeed * Time.deltaTime);
 
         if (cc.collisionFlags == CollisionFlags.Below)

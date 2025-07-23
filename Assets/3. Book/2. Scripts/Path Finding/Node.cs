@@ -1,11 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.Animations;
 
-/// <summary>
-/// Astar 알고리즘 용 노드
-/// 배열의 형태로 이해
-/// </summary>
 public class Node : IComparable<Node>
 {
     public Node parent;
@@ -16,11 +11,11 @@ public class Node : IComparable<Node>
 
     public bool isObstacle;
 
-    public Node() 
+    public Node()
     {
         parent = null;
-        nodeTotalCost = 0f;
-        estimateCost = 0f;
+        nodeTotalCost = 0;
+        estimateCost = 0;
         isObstacle = false;
     }
 
@@ -28,8 +23,8 @@ public class Node : IComparable<Node>
     {
         this.pos = pos;
         parent = null;
-        nodeTotalCost = 0f;
-        estimateCost = 0f;
+        nodeTotalCost = 0;
+        estimateCost = 0;
         isObstacle = false;
     }
 
@@ -48,13 +43,15 @@ public class Node : IComparable<Node>
     {
         float myF = GetFCost();
         float otherF = node.GetFCost();
+
         if (myF < otherF) return -1;
         if (myF > otherF) return 1;
 
-        if (estimateCost < node.estimateCost) return -1;
-        if (estimateCost > node.estimateCost) return 1;
+        if (estimateCost < node.estimateCost)
+            return -1;
+        if (estimateCost > node.estimateCost)
+            return 1;
 
         return 0;
     }
 }
-
