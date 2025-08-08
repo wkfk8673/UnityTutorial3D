@@ -64,7 +64,7 @@ public class StudyLinq4 : MonoBehaviour
 
         foreach(var person in innerJoin)
         {
-            Debug.Log($"ID : {person.StudentID} / Name : {person.StudentName} / Subject : {person.Subject} / Score : {person.Score}");
+            Debug.Log($"ID : {person.StudentID} / Description : {person.StudentName} / Subject : {person.Subject} / Score : {person.Score}");
         }
     }
 }
