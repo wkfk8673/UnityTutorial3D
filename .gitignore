@@ -88,5 +88,6 @@ InitTestScene*.unity*
 # ====== Custom Ignores ======
 
 # Ignore Resources folders you want excluded from git
-#Resources/
-#99. Resources/
+Resources/
+99. Resources/
+99.Resources/

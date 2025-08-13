@@ -7,6 +7,11 @@ public class Path : MonoBehaviour
 
     public float radius = 2f;
 
+    internal static string Combine(string persistentDataPath, string v)
+    {
+        throw new NotImplementedException();
+    }
+
     public Vector3 GetPoint(int index)
     {
         return points[index];
