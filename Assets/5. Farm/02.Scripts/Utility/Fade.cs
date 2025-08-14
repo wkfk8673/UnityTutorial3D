@@ -26,7 +26,7 @@ public class Fade : MonoBehaviour
 
     private void OnFade(float t, Color c, bool isFade, Action fadeEvent = null)
     {
-        StartCoroutine(FadeRoutine(t, c, isFade));
+        StartCoroutine(FadeRoutine(t, c, isFade, fadeEvent));
 
     }
 
@@ -48,5 +48,6 @@ public class Fade : MonoBehaviour
             yield return null;
         }
         fadeImage.raycastTarget = false; // 터치 되도록 조정
+        fadeEvent?.Invoke();
     }
 }

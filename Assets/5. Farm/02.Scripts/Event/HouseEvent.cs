@@ -20,6 +20,7 @@ public class HouseEvent : MonoBehaviour
         {
             houseTop.SetActive(true);
             GameManager.Instance.SetCameraState(CameraState.Outside);
+
         }
     }
 }

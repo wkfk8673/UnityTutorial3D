@@ -24,7 +24,11 @@ namespace Farm
 
         private void Start()
         {
-            anim = GetComponent<Animator>();
+            int characterIndex = LoadSceneManager.Instance.characterIndex;
+
+            transform.GetChild(characterIndex).gameObject.SetActive(true);
+            anim = transform.GetChild(characterIndex).GetComponent<Animator>();
+
             cc = GetComponent<CharacterController>();
         }
 

@@ -43,5 +43,6 @@ public class ItemManager : MonoBehaviour
     public void UseItem()
     {
         itemCount--;
+        Debug.Log($"현재 아이템 갯수 :{itemCount}");
     }
 }
