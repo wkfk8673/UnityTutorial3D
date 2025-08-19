@@ -4,6 +4,9 @@ using UnityEngine;
 public class Crop : MonoBehaviour
 {
     [SerializeField] private string name;
+    private enum CropPlant { Carrot = 50,Corn = 60,Eggplant = 120, Pumpkin = 150, Tomato = 160, Turnip = 170 }
+    CropPlant cropPlant;
+
     public Sprite icon;
     public Action useAction;
 
@@ -48,6 +51,11 @@ public class Crop : MonoBehaviour
         // 체력이나 스태미너 회복
         // 인벤토리에서 버튼 눌렀을 때 실행
         GameManager.Instance.item.UseItem();
-        Debug.Log($"{name} 사용");
+        CropPlant currPlant = (CropPlant)Enum.Parse(typeof(CropPlant), name);
+
+
+        GameManager.cash += (int)currPlant;
+        Debug.Log($"{name} 판매, {GameManager.cash} 를 벌었습니다.");
+        GameManager.Instance.UpdateMoneyUI();
     }
 }
